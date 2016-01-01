@@ -1,0 +1,197 @@
+//**************************************************************//
+//  Author: doc@dawning.ca
+//**************************************************************//
+
+#define l_R    3    //PWM pin for RED
+#define l_G    5    //PWM pin for GREEN
+#define l_B    6    //PWM pin for BLUE
+#define PWM_MAX	255
+#define PWM_MIN 255	
+
+#define DEL pot_del
+#define MIN_DELAY  10
+#define POT_PIN  0    //Potentiometer Pin #
+
+#define BAUD_RATE	9600
+#define CMD_BUF_LEN	8
+
+#define DELAY_MOD_MULTIPLIER	250
+
+int Rval, Gval, Bval, pot_del;
+
+boolean HighR, HighG, HighB;
+
+int Colors[3];
+boolean States[3];
+int Limits[3];
+boolean printing;
+int delayModifier;
+
+
+//Function Prototypes
+void doBootSplashRoutine();
+
+
+//Initialize stuff
+void setup() {
+  
+ //setup PWM pins for output mode 
+ pinMode(l_R, OUTPUT);
+ pinMode(l_G, OUTPUT);
+ pinMode(l_B, OUTPUT);
+ 
+ Colors[1] = l_R;
+ Colors[2] = l_G;
+ Colors[3] = l_B;
+ 
+ States[1] = false;
+ States[2] = false;
+ States[3] = false;
+ 
+ Limits[1] = 255;
+ Limits[2] = 255;
+ Limits[3] = 255;
+ 
+ //store the output value for each R,G and B pins
+ Rval = 200;
+ Gval = 200;
+ Bval = 200;
+ 
+ analogWrite(l_B, PWM_MAX);
+ delay(200);
+
+ printing = false;
+ delayModifier = 7;
+ Serial.begin(BAUD_RATE);
+
+ doBootSplashRoutine();
+} //end setup
+
+
+void changeStateIfNecessary() {
+	char* command = getPossibleInputCommands();
+	if (command[0] == '0') return;
+	else {
+		if (command[0] == 'O' && command[1] == 'n') printing = true;
+		if (command[0] == 'O' && command[1] == 'f' && command[2] == 'f') printing = false;
+
+		//Delay Modifer, 0-9, multipled in to relevance
+		if (command[0] == 'D' && command[1] == ' ') delayModifier = command[2];
+	}
+}
+
+char* getPossibleInputCommands() {
+	int i=0;
+	char* inputBuffer = initBuffer();
+
+	if (Serial.available()) {
+		delay(100);
+		while (Serial.available() && (i<(CMD_BUF_LEN-1))) {
+			inputBuffer[i++] = Serial.read();
+		}
+		inputBuffer[i++] = '\0';
+	}
+	return inputBuffer;
+}
+
+char* initBuffer() {
+	char buffer[CMD_BUF_LEN];
+	for(int i=0;i<CMD_BUF_LEN;i++) {
+		buffer[i] = '0';
+	}
+	return &buffer[0];
+}
+
+void assertLEDsAreOff() {
+	for(int i=1;i<=3;i++) {
+		int pin = Colors[i];
+		analogWrite(pin, 0);	
+	}
+}
+
+void serviceColorChanges() {
+  //Randomly pick a color to consider
+  int color = random(1,4); //pick a number between 1 and 3
+  
+  if(States[color] == true) {                     //then selected color is already high - so fade it out
+  
+    //if the others are off, then do nothing
+    if ((States[1]+States[2]+States[3]) <= 1) return;    // Could alter this to have a 1 in <some big number> chance of ever going completely dark.
+  
+    cycleDown(Colors[color]);
+    States[color] = false;                        //color is cleared, let it be known
+    
+  } else {
+   
+    //set a new limit for this color
+    //Limits[color] = random(128, PWM_MAX);
+    
+    //cycle this color up
+    cycleUp(Colors[color]);    
+    
+    //And don't forget to set the state
+    States[color] = true;
+  }
+  
+  //let it simmer
+  pause();
+}
+
+void doBootSplashRoutine() {
+	cycleUp(Colors[1]);
+	cycleUp(Colors[2]);
+	cycleUp(Colors[3]);
+	cycleDown(Colors[1]);
+	cycleDown(Colors[2]);
+	cycleDown(Colors[3]);
+}
+
+void cycleUp(int color, int limit) {
+    for (int i=0; i<limit; i++) {
+      analogWrite(color, i);
+      pause();
+  }
+} //end cycleUp
+
+void cycleDown(int color, int limit) {
+    for (int i=(limit-1); i>=0; i--) {
+      analogWrite(color, i);
+      pause(); 
+  }
+} //end cycleDown
+
+
+void cycleUp(int color) {
+    for (int i=PWM_MIN; i<PWM_MAX; i++) {
+      analogWrite(color, i);
+      pause();
+  }
+} //end cycleUp
+
+void cycleDown(int color) {
+    for (int i=PWM_MAX; i>=PWM_MIN; i--) {
+      analogWrite(color, i);
+      pause(); 
+  }
+} //end cycleDown
+
+//performs a delay determinded by the potentiometer
+void pause() {
+  //delayMicroseconds(200*analogRead(POT_PIN) + MIN_DELAY + (delayModifier*DELAY_MOD_MULTIPLIER));
+	delay(MIN_DELAY + (delayModifier*DELAY_MOD_MULTIPLIER));
+}
+
+//Main loop of the program
+//This is pretty barren mostly because I may want to have it randomly cycle through a number of color patterns
+void loop() {
+  
+  changeStateIfNecessary();
+
+  if (!printing) {
+	assertLEDsAreOff();
+  } else {	
+	serviceColorChanges();
+  }
+   
+} //end loop 
+

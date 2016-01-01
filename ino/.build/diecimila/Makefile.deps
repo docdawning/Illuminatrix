@@ -1,0 +1,130 @@
+
+
+
+
+
+
+
+
+	
+
+
+
+.build/diecimila/arduino/USBCore.d : /usr/share/arduino/hardware/arduino/cores/arduino/USBCore.cpp
+	@mkdir -p .build/diecimila/arduino
+	@/usr/bin/avr-gcc -mmcu=atmega168 -DF_CPU=16000000L -DARDUINO=101 -I/usr/share/arduino/hardware/arduino/cores/arduino -ffunction-sections -fdata-sections -g -Os -w -I/usr/share/arduino/hardware/arduino/variants/standard -I/usr/share/arduino/hardware/arduino/cores/arduino -I/usr/share/arduino/libraries/Firmata -I/usr/share/arduino/libraries/SPI -I/usr/share/arduino/libraries/Wire -I/usr/share/arduino/libraries/Wire/utility -I/usr/share/arduino/libraries/Ethernet -I/usr/share/arduino/libraries/Ethernet/utility -I/usr/share/arduino/libraries/Stepper -I/usr/share/arduino/libraries/Servo -I/usr/share/arduino/libraries/EEPROM -I/usr/share/arduino/libraries/SoftwareSerial -I/usr/share/arduino/libraries/LiquidCrystal -I/usr/share/arduino/libraries/SD -I/usr/share/arduino/libraries/SD/utility  -MM $^ > $@
+	
+	@printf ".build/diecimila/arduino/USBCore.d .build/diecimila/arduino/" | cat - $@ > $@~ && mv $@~ $@
+
+.build/diecimila/arduino/IPAddress.d : /usr/share/arduino/hardware/arduino/cores/arduino/IPAddress.cpp
+	@mkdir -p .build/diecimila/arduino
+	@/usr/bin/avr-gcc -mmcu=atmega168 -DF_CPU=16000000L -DARDUINO=101 -I/usr/share/arduino/hardware/arduino/cores/arduino -ffunction-sections -fdata-sections -g -Os -w -I/usr/share/arduino/hardware/arduino/variants/standard -I/usr/share/arduino/hardware/arduino/cores/arduino -I/usr/share/arduino/libraries/Firmata -I/usr/share/arduino/libraries/SPI -I/usr/share/arduino/libraries/Wire -I/usr/share/arduino/libraries/Wire/utility -I/usr/share/arduino/libraries/Ethernet -I/usr/share/arduino/libraries/Ethernet/utility -I/usr/share/arduino/libraries/Stepper -I/usr/share/arduino/libraries/Servo -I/usr/share/arduino/libraries/EEPROM -I/usr/share/arduino/libraries/SoftwareSerial -I/usr/share/arduino/libraries/LiquidCrystal -I/usr/share/arduino/libraries/SD -I/usr/share/arduino/libraries/SD/utility  -MM $^ > $@
+	
+	@printf ".build/diecimila/arduino/IPAddress.d .build/diecimila/arduino/" | cat - $@ > $@~ && mv $@~ $@
+
+.build/diecimila/arduino/wiring_shift.d : /usr/share/arduino/hardware/arduino/cores/arduino/wiring_shift.c
+	@mkdir -p .build/diecimila/arduino
+	@/usr/bin/avr-gcc -mmcu=atmega168 -DF_CPU=16000000L -DARDUINO=101 -I/usr/share/arduino/hardware/arduino/cores/arduino -ffunction-sections -fdata-sections -g -Os -w -I/usr/share/arduino/hardware/arduino/variants/standard -I/usr/share/arduino/hardware/arduino/cores/arduino -I/usr/share/arduino/libraries/Firmata -I/usr/share/arduino/libraries/SPI -I/usr/share/arduino/libraries/Wire -I/usr/share/arduino/libraries/Wire/utility -I/usr/share/arduino/libraries/Ethernet -I/usr/share/arduino/libraries/Ethernet/utility -I/usr/share/arduino/libraries/Stepper -I/usr/share/arduino/libraries/Servo -I/usr/share/arduino/libraries/EEPROM -I/usr/share/arduino/libraries/SoftwareSerial -I/usr/share/arduino/libraries/LiquidCrystal -I/usr/share/arduino/libraries/SD -I/usr/share/arduino/libraries/SD/utility  -MM $^ > $@
+	
+	@printf ".build/diecimila/arduino/wiring_shift.d .build/diecimila/arduino/" | cat - $@ > $@~ && mv $@~ $@
+
+.build/diecimila/arduino/wiring_analog.d : /usr/share/arduino/hardware/arduino/cores/arduino/wiring_analog.c
+	@mkdir -p .build/diecimila/arduino
+	@/usr/bin/avr-gcc -mmcu=atmega168 -DF_CPU=16000000L -DARDUINO=101 -I/usr/share/arduino/hardware/arduino/cores/arduino -ffunction-sections -fdata-sections -g -Os -w -I/usr/share/arduino/hardware/arduino/variants/standard -I/usr/share/arduino/hardware/arduino/cores/arduino -I/usr/share/arduino/libraries/Firmata -I/usr/share/arduino/libraries/SPI -I/usr/share/arduino/libraries/Wire -I/usr/share/arduino/libraries/Wire/utility -I/usr/share/arduino/libraries/Ethernet -I/usr/share/arduino/libraries/Ethernet/utility -I/usr/share/arduino/libraries/Stepper -I/usr/share/arduino/libraries/Servo -I/usr/share/arduino/libraries/EEPROM -I/usr/share/arduino/libraries/SoftwareSerial -I/usr/share/arduino/libraries/LiquidCrystal -I/usr/share/arduino/libraries/SD -I/usr/share/arduino/libraries/SD/utility  -MM $^ > $@
+	
+	@printf ".build/diecimila/arduino/wiring_analog.d .build/diecimila/arduino/" | cat - $@ > $@~ && mv $@~ $@
+
+.build/diecimila/arduino/Print.d : /usr/share/arduino/hardware/arduino/cores/arduino/Print.cpp
+	@mkdir -p .build/diecimila/arduino
+	@/usr/bin/avr-gcc -mmcu=atmega168 -DF_CPU=16000000L -DARDUINO=101 -I/usr/share/arduino/hardware/arduino/cores/arduino -ffunction-sections -fdata-sections -g -Os -w -I/usr/share/arduino/hardware/arduino/variants/standard -I/usr/share/arduino/hardware/arduino/cores/arduino -I/usr/share/arduino/libraries/Firmata -I/usr/share/arduino/libraries/SPI -I/usr/share/arduino/libraries/Wire -I/usr/share/arduino/libraries/Wire/utility -I/usr/share/arduino/libraries/Ethernet -I/usr/share/arduino/libraries/Ethernet/utility -I/usr/share/arduino/libraries/Stepper -I/usr/share/arduino/libraries/Servo -I/usr/share/arduino/libraries/EEPROM -I/usr/share/arduino/libraries/SoftwareSerial -I/usr/share/arduino/libraries/LiquidCrystal -I/usr/share/arduino/libraries/SD -I/usr/share/arduino/libraries/SD/utility  -MM $^ > $@
+	
+	@printf ".build/diecimila/arduino/Print.d .build/diecimila/arduino/" | cat - $@ > $@~ && mv $@~ $@
+
+.build/diecimila/arduino/new.d : /usr/share/arduino/hardware/arduino/cores/arduino/new.cpp
+	@mkdir -p .build/diecimila/arduino
+	@/usr/bin/avr-gcc -mmcu=atmega168 -DF_CPU=16000000L -DARDUINO=101 -I/usr/share/arduino/hardware/arduino/cores/arduino -ffunction-sections -fdata-sections -g -Os -w -I/usr/share/arduino/hardware/arduino/variants/standard -I/usr/share/arduino/hardware/arduino/cores/arduino -I/usr/share/arduino/libraries/Firmata -I/usr/share/arduino/libraries/SPI -I/usr/share/arduino/libraries/Wire -I/usr/share/arduino/libraries/Wire/utility -I/usr/share/arduino/libraries/Ethernet -I/usr/share/arduino/libraries/Ethernet/utility -I/usr/share/arduino/libraries/Stepper -I/usr/share/arduino/libraries/Servo -I/usr/share/arduino/libraries/EEPROM -I/usr/share/arduino/libraries/SoftwareSerial -I/usr/share/arduino/libraries/LiquidCrystal -I/usr/share/arduino/libraries/SD -I/usr/share/arduino/libraries/SD/utility  -MM $^ > $@
+	
+	@printf ".build/diecimila/arduino/new.d .build/diecimila/arduino/" | cat - $@ > $@~ && mv $@~ $@
+
+.build/diecimila/arduino/wiring.d : /usr/share/arduino/hardware/arduino/cores/arduino/wiring.c
+	@mkdir -p .build/diecimila/arduino
+	@/usr/bin/avr-gcc -mmcu=atmega168 -DF_CPU=16000000L -DARDUINO=101 -I/usr/share/arduino/hardware/arduino/cores/arduino -ffunction-sections -fdata-sections -g -Os -w -I/usr/share/arduino/hardware/arduino/variants/standard -I/usr/share/arduino/hardware/arduino/cores/arduino -I/usr/share/arduino/libraries/Firmata -I/usr/share/arduino/libraries/SPI -I/usr/share/arduino/libraries/Wire -I/usr/share/arduino/libraries/Wire/utility -I/usr/share/arduino/libraries/Ethernet -I/usr/share/arduino/libraries/Ethernet/utility -I/usr/share/arduino/libraries/Stepper -I/usr/share/arduino/libraries/Servo -I/usr/share/arduino/libraries/EEPROM -I/usr/share/arduino/libraries/SoftwareSerial -I/usr/share/arduino/libraries/LiquidCrystal -I/usr/share/arduino/libraries/SD -I/usr/share/arduino/libraries/SD/utility  -MM $^ > $@
+	
+	@printf ".build/diecimila/arduino/wiring.d .build/diecimila/arduino/" | cat - $@ > $@~ && mv $@~ $@
+
+.build/diecimila/arduino/Stream.d : /usr/share/arduino/hardware/arduino/cores/arduino/Stream.cpp
+	@mkdir -p .build/diecimila/arduino
+	@/usr/bin/avr-gcc -mmcu=atmega168 -DF_CPU=16000000L -DARDUINO=101 -I/usr/share/arduino/hardware/arduino/cores/arduino -ffunction-sections -fdata-sections -g -Os -w -I/usr/share/arduino/hardware/arduino/variants/standard -I/usr/share/arduino/hardware/arduino/cores/arduino -I/usr/share/arduino/libraries/Firmata -I/usr/share/arduino/libraries/SPI -I/usr/share/arduino/libraries/Wire -I/usr/share/arduino/libraries/Wire/utility -I/usr/share/arduino/libraries/Ethernet -I/usr/share/arduino/libraries/Ethernet/utility -I/usr/share/arduino/libraries/Stepper -I/usr/share/arduino/libraries/Servo -I/usr/share/arduino/libraries/EEPROM -I/usr/share/arduino/libraries/SoftwareSerial -I/usr/share/arduino/libraries/LiquidCrystal -I/usr/share/arduino/libraries/SD -I/usr/share/arduino/libraries/SD/utility  -MM $^ > $@
+	
+	@printf ".build/diecimila/arduino/Stream.d .build/diecimila/arduino/" | cat - $@ > $@~ && mv $@~ $@
+
+.build/diecimila/arduino/wiring_pulse.d : /usr/share/arduino/hardware/arduino/cores/arduino/wiring_pulse.c
+	@mkdir -p .build/diecimila/arduino
+	@/usr/bin/avr-gcc -mmcu=atmega168 -DF_CPU=16000000L -DARDUINO=101 -I/usr/share/arduino/hardware/arduino/cores/arduino -ffunction-sections -fdata-sections -g -Os -w -I/usr/share/arduino/hardware/arduino/variants/standard -I/usr/share/arduino/hardware/arduino/cores/arduino -I/usr/share/arduino/libraries/Firmata -I/usr/share/arduino/libraries/SPI -I/usr/share/arduino/libraries/Wire -I/usr/share/arduino/libraries/Wire/utility -I/usr/share/arduino/libraries/Ethernet -I/usr/share/arduino/libraries/Ethernet/utility -I/usr/share/arduino/libraries/Stepper -I/usr/share/arduino/libraries/Servo -I/usr/share/arduino/libraries/EEPROM -I/usr/share/arduino/libraries/SoftwareSerial -I/usr/share/arduino/libraries/LiquidCrystal -I/usr/share/arduino/libraries/SD -I/usr/share/arduino/libraries/SD/utility  -MM $^ > $@
+	
+	@printf ".build/diecimila/arduino/wiring_pulse.d .build/diecimila/arduino/" | cat - $@ > $@~ && mv $@~ $@
+
+.build/diecimila/arduino/HardwareSerial.d : /usr/share/arduino/hardware/arduino/cores/arduino/HardwareSerial.cpp
+	@mkdir -p .build/diecimila/arduino
+	@/usr/bin/avr-gcc -mmcu=atmega168 -DF_CPU=16000000L -DARDUINO=101 -I/usr/share/arduino/hardware/arduino/cores/arduino -ffunction-sections -fdata-sections -g -Os -w -I/usr/share/arduino/hardware/arduino/variants/standard -I/usr/share/arduino/hardware/arduino/cores/arduino -I/usr/share/arduino/libraries/Firmata -I/usr/share/arduino/libraries/SPI -I/usr/share/arduino/libraries/Wire -I/usr/share/arduino/libraries/Wire/utility -I/usr/share/arduino/libraries/Ethernet -I/usr/share/arduino/libraries/Ethernet/utility -I/usr/share/arduino/libraries/Stepper -I/usr/share/arduino/libraries/Servo -I/usr/share/arduino/libraries/EEPROM -I/usr/share/arduino/libraries/SoftwareSerial -I/usr/share/arduino/libraries/LiquidCrystal -I/usr/share/arduino/libraries/SD -I/usr/share/arduino/libraries/SD/utility  -MM $^ > $@
+	
+	@printf ".build/diecimila/arduino/HardwareSerial.d .build/diecimila/arduino/" | cat - $@ > $@~ && mv $@~ $@
+
+.build/diecimila/arduino/WMath.d : /usr/share/arduino/hardware/arduino/cores/arduino/WMath.cpp
+	@mkdir -p .build/diecimila/arduino
+	@/usr/bin/avr-gcc -mmcu=atmega168 -DF_CPU=16000000L -DARDUINO=101 -I/usr/share/arduino/hardware/arduino/cores/arduino -ffunction-sections -fdata-sections -g -Os -w -I/usr/share/arduino/hardware/arduino/variants/standard -I/usr/share/arduino/hardware/arduino/cores/arduino -I/usr/share/arduino/libraries/Firmata -I/usr/share/arduino/libraries/SPI -I/usr/share/arduino/libraries/Wire -I/usr/share/arduino/libraries/Wire/utility -I/usr/share/arduino/libraries/Ethernet -I/usr/share/arduino/libraries/Ethernet/utility -I/usr/share/arduino/libraries/Stepper -I/usr/share/arduino/libraries/Servo -I/usr/share/arduino/libraries/EEPROM -I/usr/share/arduino/libraries/SoftwareSerial -I/usr/share/arduino/libraries/LiquidCrystal -I/usr/share/arduino/libraries/SD -I/usr/share/arduino/libraries/SD/utility  -MM $^ > $@
+	
+	@printf ".build/diecimila/arduino/WMath.d .build/diecimila/arduino/" | cat - $@ > $@~ && mv $@~ $@
+
+.build/diecimila/arduino/HID.d : /usr/share/arduino/hardware/arduino/cores/arduino/HID.cpp
+	@mkdir -p .build/diecimila/arduino
+	@/usr/bin/avr-gcc -mmcu=atmega168 -DF_CPU=16000000L -DARDUINO=101 -I/usr/share/arduino/hardware/arduino/cores/arduino -ffunction-sections -fdata-sections -g -Os -w -I/usr/share/arduino/hardware/arduino/variants/standard -I/usr/share/arduino/hardware/arduino/cores/arduino -I/usr/share/arduino/libraries/Firmata -I/usr/share/arduino/libraries/SPI -I/usr/share/arduino/libraries/Wire -I/usr/share/arduino/libraries/Wire/utility -I/usr/share/arduino/libraries/Ethernet -I/usr/share/arduino/libraries/Ethernet/utility -I/usr/share/arduino/libraries/Stepper -I/usr/share/arduino/libraries/Servo -I/usr/share/arduino/libraries/EEPROM -I/usr/share/arduino/libraries/SoftwareSerial -I/usr/share/arduino/libraries/LiquidCrystal -I/usr/share/arduino/libraries/SD -I/usr/share/arduino/libraries/SD/utility  -MM $^ > $@
+	
+	@printf ".build/diecimila/arduino/HID.d .build/diecimila/arduino/" | cat - $@ > $@~ && mv $@~ $@
+
+.build/diecimila/arduino/main.d : /usr/share/arduino/hardware/arduino/cores/arduino/main.cpp
+	@mkdir -p .build/diecimila/arduino
+	@/usr/bin/avr-gcc -mmcu=atmega168 -DF_CPU=16000000L -DARDUINO=101 -I/usr/share/arduino/hardware/arduino/cores/arduino -ffunction-sections -fdata-sections -g -Os -w -I/usr/share/arduino/hardware/arduino/variants/standard -I/usr/share/arduino/hardware/arduino/cores/arduino -I/usr/share/arduino/libraries/Firmata -I/usr/share/arduino/libraries/SPI -I/usr/share/arduino/libraries/Wire -I/usr/share/arduino/libraries/Wire/utility -I/usr/share/arduino/libraries/Ethernet -I/usr/share/arduino/libraries/Ethernet/utility -I/usr/share/arduino/libraries/Stepper -I/usr/share/arduino/libraries/Servo -I/usr/share/arduino/libraries/EEPROM -I/usr/share/arduino/libraries/SoftwareSerial -I/usr/share/arduino/libraries/LiquidCrystal -I/usr/share/arduino/libraries/SD -I/usr/share/arduino/libraries/SD/utility  -MM $^ > $@
+	
+	@printf ".build/diecimila/arduino/main.d .build/diecimila/arduino/" | cat - $@ > $@~ && mv $@~ $@
+
+.build/diecimila/arduino/CDC.d : /usr/share/arduino/hardware/arduino/cores/arduino/CDC.cpp
+	@mkdir -p .build/diecimila/arduino
+	@/usr/bin/avr-gcc -mmcu=atmega168 -DF_CPU=16000000L -DARDUINO=101 -I/usr/share/arduino/hardware/arduino/cores/arduino -ffunction-sections -fdata-sections -g -Os -w -I/usr/share/arduino/hardware/arduino/variants/standard -I/usr/share/arduino/hardware/arduino/cores/arduino -I/usr/share/arduino/libraries/Firmata -I/usr/share/arduino/libraries/SPI -I/usr/share/arduino/libraries/Wire -I/usr/share/arduino/libraries/Wire/utility -I/usr/share/arduino/libraries/Ethernet -I/usr/share/arduino/libraries/Ethernet/utility -I/usr/share/arduino/libraries/Stepper -I/usr/share/arduino/libraries/Servo -I/usr/share/arduino/libraries/EEPROM -I/usr/share/arduino/libraries/SoftwareSerial -I/usr/share/arduino/libraries/LiquidCrystal -I/usr/share/arduino/libraries/SD -I/usr/share/arduino/libraries/SD/utility  -MM $^ > $@
+	
+	@printf ".build/diecimila/arduino/CDC.d .build/diecimila/arduino/" | cat - $@ > $@~ && mv $@~ $@
+
+.build/diecimila/arduino/WInterrupts.d : /usr/share/arduino/hardware/arduino/cores/arduino/WInterrupts.c
+	@mkdir -p .build/diecimila/arduino
+	@/usr/bin/avr-gcc -mmcu=atmega168 -DF_CPU=16000000L -DARDUINO=101 -I/usr/share/arduino/hardware/arduino/cores/arduino -ffunction-sections -fdata-sections -g -Os -w -I/usr/share/arduino/hardware/arduino/variants/standard -I/usr/share/arduino/hardware/arduino/cores/arduino -I/usr/share/arduino/libraries/Firmata -I/usr/share/arduino/libraries/SPI -I/usr/share/arduino/libraries/Wire -I/usr/share/arduino/libraries/Wire/utility -I/usr/share/arduino/libraries/Ethernet -I/usr/share/arduino/libraries/Ethernet/utility -I/usr/share/arduino/libraries/Stepper -I/usr/share/arduino/libraries/Servo -I/usr/share/arduino/libraries/EEPROM -I/usr/share/arduino/libraries/SoftwareSerial -I/usr/share/arduino/libraries/LiquidCrystal -I/usr/share/arduino/libraries/SD -I/usr/share/arduino/libraries/SD/utility  -MM $^ > $@
+	
+	@printf ".build/diecimila/arduino/WInterrupts.d .build/diecimila/arduino/" | cat - $@ > $@~ && mv $@~ $@
+
+.build/diecimila/arduino/Tone.d : /usr/share/arduino/hardware/arduino/cores/arduino/Tone.cpp
+	@mkdir -p .build/diecimila/arduino
+	@/usr/bin/avr-gcc -mmcu=atmega168 -DF_CPU=16000000L -DARDUINO=101 -I/usr/share/arduino/hardware/arduino/cores/arduino -ffunction-sections -fdata-sections -g -Os -w -I/usr/share/arduino/hardware/arduino/variants/standard -I/usr/share/arduino/hardware/arduino/cores/arduino -I/usr/share/arduino/libraries/Firmata -I/usr/share/arduino/libraries/SPI -I/usr/share/arduino/libraries/Wire -I/usr/share/arduino/libraries/Wire/utility -I/usr/share/arduino/libraries/Ethernet -I/usr/share/arduino/libraries/Ethernet/utility -I/usr/share/arduino/libraries/Stepper -I/usr/share/arduino/libraries/Servo -I/usr/share/arduino/libraries/EEPROM -I/usr/share/arduino/libraries/SoftwareSerial -I/usr/share/arduino/libraries/LiquidCrystal -I/usr/share/arduino/libraries/SD -I/usr/share/arduino/libraries/SD/utility  -MM $^ > $@
+	
+	@printf ".build/diecimila/arduino/Tone.d .build/diecimila/arduino/" | cat - $@ > $@~ && mv $@~ $@
+
+.build/diecimila/arduino/WString.d : /usr/share/arduino/hardware/arduino/cores/arduino/WString.cpp
+	@mkdir -p .build/diecimila/arduino
+	@/usr/bin/avr-gcc -mmcu=atmega168 -DF_CPU=16000000L -DARDUINO=101 -I/usr/share/arduino/hardware/arduino/cores/arduino -ffunction-sections -fdata-sections -g -Os -w -I/usr/share/arduino/hardware/arduino/variants/standard -I/usr/share/arduino/hardware/arduino/cores/arduino -I/usr/share/arduino/libraries/Firmata -I/usr/share/arduino/libraries/SPI -I/usr/share/arduino/libraries/Wire -I/usr/share/arduino/libraries/Wire/utility -I/usr/share/arduino/libraries/Ethernet -I/usr/share/arduino/libraries/Ethernet/utility -I/usr/share/arduino/libraries/Stepper -I/usr/share/arduino/libraries/Servo -I/usr/share/arduino/libraries/EEPROM -I/usr/share/arduino/libraries/SoftwareSerial -I/usr/share/arduino/libraries/LiquidCrystal -I/usr/share/arduino/libraries/SD -I/usr/share/arduino/libraries/SD/utility  -MM $^ > $@
+	
+	@printf ".build/diecimila/arduino/WString.d .build/diecimila/arduino/" | cat - $@ > $@~ && mv $@~ $@
+
+.build/diecimila/arduino/wiring_digital.d : /usr/share/arduino/hardware/arduino/cores/arduino/wiring_digital.c
+	@mkdir -p .build/diecimila/arduino
+	@/usr/bin/avr-gcc -mmcu=atmega168 -DF_CPU=16000000L -DARDUINO=101 -I/usr/share/arduino/hardware/arduino/cores/arduino -ffunction-sections -fdata-sections -g -Os -w -I/usr/share/arduino/hardware/arduino/variants/standard -I/usr/share/arduino/hardware/arduino/cores/arduino -I/usr/share/arduino/libraries/Firmata -I/usr/share/arduino/libraries/SPI -I/usr/share/arduino/libraries/Wire -I/usr/share/arduino/libraries/Wire/utility -I/usr/share/arduino/libraries/Ethernet -I/usr/share/arduino/libraries/Ethernet/utility -I/usr/share/arduino/libraries/Stepper -I/usr/share/arduino/libraries/Servo -I/usr/share/arduino/libraries/EEPROM -I/usr/share/arduino/libraries/SoftwareSerial -I/usr/share/arduino/libraries/LiquidCrystal -I/usr/share/arduino/libraries/SD -I/usr/share/arduino/libraries/SD/utility  -MM $^ > $@
+	
+	@printf ".build/diecimila/arduino/wiring_digital.d .build/diecimila/arduino/" | cat - $@ > $@~ && mv $@~ $@
+
+
+
+.build/diecimila/arduino/dependencies.d : .build/diecimila/arduino/USBCore.d .build/diecimila/arduino/IPAddress.d .build/diecimila/arduino/wiring_shift.d .build/diecimila/arduino/wiring_analog.d .build/diecimila/arduino/Print.d .build/diecimila/arduino/new.d .build/diecimila/arduino/wiring.d .build/diecimila/arduino/Stream.d .build/diecimila/arduino/wiring_pulse.d .build/diecimila/arduino/HardwareSerial.d .build/diecimila/arduino/WMath.d .build/diecimila/arduino/HID.d .build/diecimila/arduino/main.d .build/diecimila/arduino/CDC.d .build/diecimila/arduino/WInterrupts.d .build/diecimila/arduino/Tone.d .build/diecimila/arduino/WString.d .build/diecimila/arduino/wiring_digital.d
+	@echo [96mScanning dependencies of arduino[0m
+	@mkdir -p .build/diecimila/arduino
+	@cat $^ > $@;
+
+all : .build/diecimila/arduino/dependencies.d
+	@true
+

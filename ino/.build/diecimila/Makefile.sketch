@@ -1,0 +1,14 @@
+
+
+
+
+
+.build/diecimila/src/sketch.cpp : src/sketch.ino
+	@mkdir -p .build/diecimila/src
+	@echo [93msrc/sketch.ino[0m
+	@/usr/local/bin/ino preproc  -o $@ $^
+
+
+all : .build/diecimila/src/sketch.cpp
+	@true
+
