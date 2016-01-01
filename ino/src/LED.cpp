@@ -21,6 +21,10 @@ class LED {
                         else currentValue = newValue;
                 }
 
+		int getValue() {
+			return currentValue;
+		}
+
                 void enable() {
                         activated = true;
                 }
