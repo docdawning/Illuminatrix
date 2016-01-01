@@ -9,4 +9,5 @@
  /usr/share/arduino/hardware/arduino/cores/arduino/Printable.h \
  /usr/share/arduino/hardware/arduino/cores/arduino/new.h \
  /usr/share/arduino/hardware/arduino/variants/standard/pins_arduino.h \
- src/LED.cpp
+ src/LED.cpp /usr/share/arduino/hardware/arduino/cores/arduino/WString.h \
+ src/Color.cpp

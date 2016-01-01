@@ -1,5 +1,6 @@
 #include <Arduino.h>
 #include "LED.cpp"
+#include "Color.cpp"
 void refreshLEDs();
 void setup();
 void printLEDs();
@@ -7,6 +8,7 @@ void refreshLEDState(LED led);
 void setLEDs(boolean state);
 char* findSpaceDelimitedSubstring(String input, int numberOfLeadingSpaces);
 void setLED(String input);
+void setColor(Color color);
 void interpretInput(String input);
 void serviceInputIfNecessary();
 void serviceHypnoOrbIfNecessary();
@@ -17,7 +19,7 @@ void loop();
 //**************************************************************//
 using namespace std;
 //#include "LED.cpp"
-
+//#include "Color.cpp"
 
 //##################################################################
 //## Main Class ####################################################
@@ -31,6 +33,11 @@ using namespace std;
 #define NUMBER_OF_SPACES_BEFORE_PWM_IN_SET_CMD		2
 #define NUMBER_OF_SPACES_BEFORE_STATUS_IN_SET_CMD	3
 #define NUMBER_OF_SPACES_BEFORE_LED_NUMBER_IN_SET_CMD	1
+#define NAME_WHITE	"WHITE"
+#define	NAME_RED	"RED"
+#define NAME_GREEN	"GREEN"
+#define NAME_BLUE	"BLUE"
+#define NAME_STANDBY	"STANDBY"
 
 //Function Prototypes////
 void refreshLEDs();
@@ -38,6 +45,11 @@ void refreshLEDState(LED led);
 
 //Globals////
 LED LEDS[3];
+Color WHITE;
+Color RED;
+Color GREEN;
+Color BLUE;
+Color STANDBY;
 String inputString;
 boolean hypnoOrb;
 
@@ -53,10 +65,17 @@ void refreshLEDs() {
 
 //Arduino's firmware start of execution
 void setup() {
-	//Setup for each LED record
-	LEDS[0].initialize(l_R, true, 16, 255, 96);
-	LEDS[1].initialize(l_G, true, 0, 255, 200);
-	LEDS[2].initialize(l_B, true, 0, 255, 180);
+	//Create color constants
+	WHITE.initialize(255, 255, 64);
+	RED.initialize(255, 0, 0);
+	GREEN.initialize(0, 255, 0);
+	BLUE.initialize(0, 0, 255);
+	STANDBY.initialize(16, 0, 0);
+
+	//Setup for each LED
+	LEDS[0].initialize(NAME_RED, l_R, true, 0, 255, 96);
+	LEDS[1].initialize(NAME_GREEN, l_G, true, 0, 255, 200);
+	LEDS[2].initialize(NAME_BLUE, l_B, true, 0, 255, 180);
 
 	Serial.begin(BAUD_RATE);
 	hypnoOrb = false;
@@ -139,10 +158,25 @@ void setLED(String input) {
 	Serial.println(status);
 }
 
+void setColor(Color color) {
+	for (int i=0;i<3;i++) {
+		LED* led = &LEDS[i];
+		if (led->name.startsWith(NAME_RED)) led->setValue(color.red);
+		if (led->name.startsWith(NAME_GREEN)) led->setValue(color.green);
+		if (led->name.startsWith(NAME_BLUE)) led->setValue(color.blue);
+		led->enable();
+	}	
+}
+
 void interpretInput(String input) {
 	if (inputString.startsWith("ON")) setLEDs(true);
 	if (inputString.startsWith("OFF")) setLEDs(false);
 	if (inputString.startsWith("SET")) setLED(inputString);
+	if (inputString.startsWith(NAME_WHITE)) setColor(WHITE);
+	if (inputString.startsWith(NAME_RED)) setColor(RED);
+	if (inputString.startsWith(NAME_GREEN)) setColor(GREEN);
+	if (inputString.startsWith(NAME_BLUE)) setColor(BLUE);
+	if (inputString.startsWith(NAME_STANDBY)) setColor(STANDBY);
 	if (inputString.startsWith("CYCLEON")) hypnoOrb=true;
 	if (inputString.startsWith("CYCLEOFF")) hypnoOrb=false;
 	printLEDs();

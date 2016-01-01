@@ -156,6 +156,12 @@ include .build/diecimila/arduino/WString.d
 	@/usr/bin/avr-g++ -mmcu=atmega168 -DF_CPU=16000000L -DARDUINO=101 -I/usr/share/arduino/hardware/arduino/cores/arduino -ffunction-sections -fdata-sections -g -Os -w -I/usr/share/arduino/hardware/arduino/variants/standard -I/usr/share/arduino/hardware/arduino/cores/arduino -fno-exceptions  -o $@ -c src/LED.cpp
 include .build/diecimila/src/LED.d
 
+.build/diecimila/src/Color.o : src/Color.cpp
+	@echo [93msrc/Color.cpp[0m
+	@mkdir -p .build/diecimila/src
+	@/usr/bin/avr-g++ -mmcu=atmega168 -DF_CPU=16000000L -DARDUINO=101 -I/usr/share/arduino/hardware/arduino/cores/arduino -ffunction-sections -fdata-sections -g -Os -w -I/usr/share/arduino/hardware/arduino/variants/standard -I/usr/share/arduino/hardware/arduino/cores/arduino -fno-exceptions  -o $@ -c src/Color.cpp
+include .build/diecimila/src/Color.d
+
 .build/diecimila/src/sketch.o : .build/diecimila/src/sketch.cpp
 	@echo [93msrc/sketch.cpp[0m
 	@mkdir -p .build/diecimila/src
@@ -168,7 +174,7 @@ include .build/diecimila/src/sketch.d
 
 
 
-.build/diecimila/firmware.elf : .build/diecimila/src/LED.o .build/diecimila/src/sketch.o .build/diecimila/arduino/libarduino.a
+.build/diecimila/firmware.elf : .build/diecimila/src/LED.o .build/diecimila/src/Color.o .build/diecimila/src/sketch.o .build/diecimila/arduino/libarduino.a
 	@echo [92mLinking firmware.elf[0m
 	@/usr/bin/avr-gcc -mmcu=atmega168 -Wl,-Os -Wl,--gc-sections -o $@ $^ -lm
 
