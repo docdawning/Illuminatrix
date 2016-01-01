@@ -1,0 +1,46 @@
+EDIT /dev/ttyMy-Arduino to be whatever your Illuminatrix-flashed Arduino attaches to. Be mindful that
+many printer motherboards are glorified Arduinos, so you don't want to bind to their ports, or you'll be
+firing non-sense at your printer AND Octoprint will no longer be able to talk to it.
+
+---- CUT & PASTE the below in to your config.yaml, after editing it ----
+
+events:
+  enabled: true
+  subscriptions:
+  - command: echo -n "OFF;" > /dev/ttyMy-Arduino
+    enabled: true
+    event: Disconnected
+    type: system
+  - command: echo -n "STANDBY;" > /dev/ttyMy-Arduino
+    enabled: true
+    event: Connected
+    type: system
+  - command: echo -n "WHITE;" > /dev/ttyMy-Arduino
+    enabled: true
+    event: PrintStarted
+    type: system
+  - command: echo -n "STANDBY;" > /dev/ttyMy-Arduino
+    enabled: true
+    event: PrintDone
+    type: system
+  - command: echo -n "STANDBY;" > /dev/ttyMy-Arduino
+    enabled: true
+    event: PrintCancelled
+    type: system
+  - command: echo -n "BLUE;" > /dev/ttyMy-Arduino
+    enabled: true
+    event: PrintPaused
+    type: system
+  - command: echo -n "WHITE;" > /dev/ttyMy-Arduino
+    enabled: true
+    event: PrintResumed
+    type: system
+  - command: echo -n "RED;" > /dev/ttyMy-Arduino
+    enabled: true
+    event: PrintFailed
+    type: system
+  - command: echo -n "GREEN;" > /dev/ttyMy-Arduino
+    enabled: true
+    event: Home
+    type: system
+
