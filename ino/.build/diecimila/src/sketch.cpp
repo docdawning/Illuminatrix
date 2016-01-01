@@ -135,6 +135,7 @@ void handleInputIfNecessary() {
 	if (Serial.available() > 0) {
 		char ch = (char)Serial.read();
 		inputString += ch;
+		Serial.print(ch);
 		if (ch == '\r' || ch == ';') {
 			interpretInput(inputString);
 			inputString = "";
@@ -147,5 +148,4 @@ void handleInputIfNecessary() {
 void loop() {
 	refreshLEDs();
 	handleInputIfNecessary();
-	delay(250);
 }
