@@ -37,6 +37,8 @@ using namespace std;
 #define	NAME_RED	"RED"
 #define NAME_GREEN	"GREEN"
 #define NAME_BLUE	"BLUE"
+#define NAME_YELLOW	"YELLOW"
+#define NAME_PURPLE	"PURPLE"
 #define NAME_STANDBY	"STANDBY"
 
 //Function Prototypes////
@@ -49,6 +51,8 @@ Color WHITE;
 Color RED;
 Color GREEN;
 Color BLUE;
+Color YELLOW;
+Color PURPLE;
 Color STANDBY;
 String inputString;
 boolean hypnoOrb;
@@ -70,11 +74,14 @@ void setup() {
 	RED.initialize(255, 0, 0);
 	GREEN.initialize(0, 255, 0);
 	BLUE.initialize(0, 0, 255);
+	YELLOW.initialize(255, 255, 0);
+	PURPLE.initialize(255, 0, 255);
 	STANDBY.initialize(16, 0, 0);
 
+
 	//Setup for each LED
-	LEDS[0].initialize(NAME_RED, l_R, true, 0, 255, 96);
-	LEDS[1].initialize(NAME_GREEN, l_G, true, 0, 255, 200);
+	LEDS[0].initialize(NAME_RED, l_R, true, 0, 255, 0);
+	LEDS[1].initialize(NAME_GREEN, l_G, true, 0, 255, 0);
 	LEDS[2].initialize(NAME_BLUE, l_B, true, 0, 255, 180);
 
 	Serial.begin(BAUD_RATE);
@@ -176,6 +183,8 @@ void interpretInput(String input) {
 	if (inputString.startsWith(NAME_RED)) setColor(RED);
 	if (inputString.startsWith(NAME_GREEN)) setColor(GREEN);
 	if (inputString.startsWith(NAME_BLUE)) setColor(BLUE);
+	if (inputString.startsWith(NAME_YELLOW)) setColor(YELLOW);
+	if (inputString.startsWith(NAME_PURPLE)) setColor(PURPLE);
 	if (inputString.startsWith(NAME_STANDBY)) setColor(STANDBY);
 	if (inputString.startsWith("CYCLEON")) hypnoOrb=true;
 	if (inputString.startsWith("CYCLEOFF")) hypnoOrb=false;

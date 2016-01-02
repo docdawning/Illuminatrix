@@ -16,7 +16,7 @@ class IlluminatrixPlugin(octoprint.plugin.StartupPlugin,
 		pass
 
 	def issueCommand(self, cmd_str):
-		Popen("echo -n \""+cmd_str+";\" > /dev/ttyUSB0", shell=True)
+		Popen("echo -n \""+cmd_str+";\" > "+self._settings.get(["Port"]), shell=True)
 		return flask.make_response("Illuminatrix "+cmd_str+" mode", 750)
 
 	##StartupPlugin
@@ -27,6 +27,7 @@ class IlluminatrixPlugin(octoprint.plugin.StartupPlugin,
 	def get_template_configs(self):
 		return [
 			dict(type="tab", template="Illuminatrix_tab.jinja2")
+			#dict(type="settings", template="Illuminatrix_settings.jinja2")
 		]
 
 	##BlueprintPlugin
@@ -59,6 +60,10 @@ class IlluminatrixPlugin(octoprint.plugin.StartupPlugin,
         def blue(self):
                 return self.issueCommand("BLUE")
 
+	def is_blueprint_protected(self):
+		return False
+
+
 	#### EVENTS #####################################################
 	##EventHandlerPlugin
 	def on_event(self, event, payload):
@@ -78,12 +83,13 @@ class IlluminatrixPlugin(octoprint.plugin.StartupPlugin,
 			PrintResumed="WHITE",
 			PrintDone="STANDBY",
 			Home="GREEN",
+			Port="/dev/ttyUSB0",
 		)
 
-
-
-	def is_blueprint_protected(self):
-		return False
+	def get_template_configs(self):
+		return [
+			dict(type="settings", custom_bindings=False)
+		]
 
 # If you want your plugin to be registered within OctoPrint under a different name than what you defined in setup.py
 # ("OctoPrint-PluginIlluminatrix"), you may define that here. Same goes for the other metadata derived from setup.py that
