@@ -8,7 +8,9 @@ from subprocess import call,Popen
 
 class IlluminatrixPlugin(octoprint.plugin.StartupPlugin,
 			octoprint.plugin.TemplatePlugin,
-			octoprint.plugin.BlueprintPlugin):
+			octoprint.plugin.EventHandlerPlugin,
+			octoprint.plugin.BlueprintPlugin,
+			octoprint.plugin.SettingsPlugin):
 
 	def __init__(self):
 		pass
@@ -56,6 +58,27 @@ class IlluminatrixPlugin(octoprint.plugin.StartupPlugin,
         @octoprint.plugin.BlueprintPlugin.route("/blue", methods=["GET"])
         def blue(self):
                 return self.issueCommand("BLUE")
+
+	#### EVENTS #####################################################
+	##EventHandlerPlugin
+	def on_event(self, event, payload):
+		command = self._settings.get([event])
+		if command is not None:
+			self.issueCommand(command);
+
+	#### SETTINGS ###################################################
+	def get_settings_defaults(self):
+		return dict(
+			Disconnected="OFF",
+			Connected="STANDBY",
+			PrintStarted="WHITE",
+			PrintCancelled="STANDBY",
+			PrintFailed="RED",
+			PrintPaused="YELLOW",
+			PrintResumed="WHITE",
+			PrintDone="STANDBY",
+			Home="GREEN",
+		)
 
 
 
