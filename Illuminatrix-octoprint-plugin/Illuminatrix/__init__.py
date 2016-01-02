@@ -4,6 +4,7 @@ from __future__ import absolute_import
 import octoprint.plugin
 import flask
 import os
+import serial
 from subprocess import call,Popen
 
 class IlluminatrixPlugin(octoprint.plugin.StartupPlugin,
@@ -17,6 +18,7 @@ class IlluminatrixPlugin(octoprint.plugin.StartupPlugin,
 
 	def issueCommand(self, cmd_str):
 		Popen("echo -n \""+cmd_str+";\" > "+self._settings.get(["Port"]), shell=True)
+		#serial.Serial(self._settings.get(["Port"]),9600,timeout=4).write(cmd_str)
 		return flask.make_response("Illuminatrix "+cmd_str+" mode", 750)
 
 	##StartupPlugin

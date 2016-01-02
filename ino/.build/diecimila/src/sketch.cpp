@@ -70,7 +70,7 @@ void refreshLEDs() {
 //Arduino's firmware start of execution
 void setup() {
 	//Create color constants
-	WHITE.initialize(255, 255, 64);
+	WHITE.initialize(255, 255, 16);
 	RED.initialize(255, 0, 0);
 	GREEN.initialize(0, 255, 0);
 	BLUE.initialize(0, 0, 255);
