@@ -1,6 +1,9 @@
 # Illuminatrix
 Illuminatrix is a smart lighting system intended for use in 3D printing. By default, your printer will be lit dim-red when in "STANDBY", "GREEN" once an axis has been zeroed, pseudio-"WHITE" while printing, "YELLOW" when paused, "RED" if the print has failed, etc.
 
+## Demo
+<iframe width="560" height="315" src="https://www.youtube.com/embed/iWDjNnod_Ak" frameborder="0" allowfullscreen></iframe>
+
 ## Software
 Illuminatrix has two software components, an Octoprint Plugin and an Arduino firmware. 
 
