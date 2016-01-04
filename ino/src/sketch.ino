@@ -39,8 +39,15 @@ Color YELLOW;
 Color PURPLE;
 Color STANDBY;
 String inputString;
-boolean hypnoOrb;
 
+//HypnoOrb Components
+boolean hypnoOrb;
+boolean hypnoOrbAscending;
+LED* hypnoOrbDeltaSubject;
+int cyclesPerStep;
+int cyclesSinceLastStep;
+int minBrightness;
+int stepsSinceChange;
 
 //##################################################################
 //## Init functions ################################################
@@ -54,7 +61,7 @@ void refreshLEDs() {
 //Arduino's firmware start of execution
 void setup() {
 	//Create color constants
-	WHITE.initialize(255, 255, 16);
+	WHITE.initialize(255, 255, 48);
 	RED.initialize(255, 0, 0);
 	GREEN.initialize(0, 255, 0);
 	BLUE.initialize(0, 0, 255);
@@ -70,6 +77,12 @@ void setup() {
 
 	Serial.begin(BAUD_RATE);
 	hypnoOrb = false;
+	hypnoOrbAscending = true;
+	hypnoOrbDeltaSubject = &LEDS[1];
+	cyclesPerStep = 100;
+	cyclesSinceLastStep = 0;
+	minBrightness = 500;
+	stepsSinceChange = 0;
 
 	Serial.println("Illuminatrix greets you.");
 } //end setup
@@ -150,13 +163,16 @@ void setLED(String input) {
 }
 
 void setColor(Color color) {
+	hypnoOrb = false;
+	resetColorMins();	
+
 	for (int i=0;i<3;i++) {
 		LED* led = &LEDS[i];
 		if (led->name.startsWith(NAME_RED)) led->setValue(color.red);
 		if (led->name.startsWith(NAME_GREEN)) led->setValue(color.green);
 		if (led->name.startsWith(NAME_BLUE)) led->setValue(color.blue);
 		led->enable();
-	}	
+	}
 }
 
 void interpretInput(String input) {
@@ -172,7 +188,22 @@ void interpretInput(String input) {
 	if (inputString.startsWith(NAME_STANDBY)) setColor(STANDBY);
 	if (inputString.startsWith("CYCLEON")) hypnoOrb=true;
 	if (inputString.startsWith("CYCLEOFF")) hypnoOrb=false;
+	if (inputString.startsWith("CYCLEWHITE")) setForWhiteCycle();
+	if (inputString.startsWith("RESETCOLORMINS")) resetColorMins();
 	printLEDs();
+}
+
+void resetColorMins() {
+	LEDS[0].minPWM = 0;
+	LEDS[1].minPWM = 0;
+	LEDS[2].minPWM = 0;
+}
+
+void setForWhiteCycle() {
+	LEDS[0].minPWM = 64;
+	LEDS[1].minPWM = 96;
+	LEDS[2].minPWM = 16;
+	Serial.println("Rigged for white-baised cycling");
 }
 
 void serviceInputIfNecessary() {
@@ -190,8 +221,53 @@ void serviceInputIfNecessary() {
 	}
 }
 
-void serviceHypnoOrbIfNecessary() {
+//This function is intended to prevent all colours from ever going below the min threshold
+bool isNotOkayToDescendFurther(bool preference) {
+	int brightnessSum = 0;
+	for (int i=0;i<3;i++) {
+		LED* led = &LEDS[i];
+		brightnessSum += led->getValue();
+	}
+	if (brightnessSum <= minBrightness) {
+		return true;
+	} 
+	return preference;
+}
 
+void serviceHypnoOrbIfNecessary() {
+	//Relevant Globals
+	//boolean hypnoOrb;
+	//boolean hypnoOrbAscending;
+	//LED hypnoOrbDeltaSubject;
+	//int	cyclesPerStep;
+	//int	cyclesSinceLastStep;
+	if (!hypnoOrb) return;
+	
+	//if subject has reached max, randomly select an LED and a direction
+	//if ((hypnoOrbDeltaSubject->getValue() > hypnoOrbDeltaSubject->maxPWM) || (hypnoOrbDeltaSubject->getValue() < hypnoOrbDeltaSubject->minPWM)) {
+	if (stepsSinceChange > 255) {
+		stepsSinceChange = 0;
+		int newLEDNumber = random(0,3);
+		int newDirection = random(0,2);
+		hypnoOrbDeltaSubject = &LEDS[newLEDNumber];
+		hypnoOrbAscending = isNotOkayToDescendFurther((boolean)(newDirection));
+	}
+
+	//Increment cycle counter if necessary
+	if (cyclesSinceLastStep < cyclesPerStep) {
+		cyclesSinceLastStep++;
+		return;
+	}
+
+	stepsSinceChange++;
+
+	//alter subject according to direction
+	cyclesSinceLastStep = 0;
+	int deltaValue = 0;
+	if (hypnoOrbAscending) deltaValue = 1;
+	else deltaValue = -1;
+
+	hypnoOrbDeltaSubject->setValue(hypnoOrbDeltaSubject->getValue() + deltaValue);
 }
 
 //Main
@@ -199,5 +275,4 @@ void loop() {
 	refreshLEDs();
 	serviceInputIfNecessary();
 	serviceHypnoOrbIfNecessary();
-	delay(10);
 }
