@@ -78,7 +78,7 @@ class IlluminatrixPlugin(octoprint.plugin.StartupPlugin,
 		return dict(
 			Disconnected="OFF",
 			Connected="STANDBY",
-			PrintStarted="WHITE",
+			PrintStarted="CYCLEON",
 			PrintCancelled="STANDBY",
 			PrintFailed="RED",
 			PrintPaused="YELLOW",

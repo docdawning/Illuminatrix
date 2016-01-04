@@ -266,7 +266,6 @@ void serviceHypnoOrbIfNecessary() {
 	//if ((hypnoOrbDeltaSubject->getValue() > hypnoOrbDeltaSubject->maxPWM) || (hypnoOrbDeltaSubject->getValue() < hypnoOrbDeltaSubject->minPWM)) {
 	if (stepsSinceChange > 255) {
 		stepsSinceChange = 0;
-		Serial.println("Changing LEDs");
 		int newLEDNumber = random(0,3);
 		int newDirection = random(0,2);
 		hypnoOrbDeltaSubject = &LEDS[newLEDNumber];
