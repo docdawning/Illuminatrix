@@ -3,7 +3,8 @@ Illuminatrix is a smart lighting system intended for use in 3D printing. By defa
 
 ## Demo
 [![Illuminatrix Demo](http://www.dawning.ca/wp-content/uploads/2016/01/IlluminatrixDemoGif.gif)](https://www.youtube.com/embed/iWDjNnod_Ak)
-Click the above GIF to see the detailed demo video on YouTube.
+<BR /><i>Click the above GIF to see the detailed demo video on YouTube.</i>
+
 
 ## Software
 Illuminatrix has two software components, an Octoprint Plugin and an Arduino firmware. 
