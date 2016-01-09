@@ -19,3 +19,17 @@ Illuminatrix depends on a dedicated Arduino board to receive basic commands issu
 
 ## Octoprint Plugin Installation
 Copy/link the plugin directory to your Octoprint plugin directory.
+
+## Illuminatrix Arduino Firmware
+### Command-set
+Here is a non-exhaustive list of the lighting commands the Illuminatrix Arduino firmware command-set supports:
+ * ON
+ * OFF
+ * RED
+ * GREEN
+ * BLUE
+ * PURPLE
+ * YELLOW
+ * CYCLEON
+ * CYCLEWHITE
+ * SET [led #] [pwm value] [0|1] (ex: "SET 2 255 1" sets LED pin 2 to full brightness and enables it)
