@@ -62,6 +62,33 @@ class IlluminatrixPlugin(octoprint.plugin.StartupPlugin,
         def blue(self):
                 return self.issueCommand("BLUE")
 
+        ##BlueprintPlugin
+        @octoprint.plugin.BlueprintPlugin.route("/purple", methods=["GET"])
+        def purple(self):
+                return self.issueCommand("PURPLE")
+
+        ##BlueprintPlugin
+        @octoprint.plugin.BlueprintPlugin.route("/yellow", methods=["GET"])
+        def yellow(self):
+                return self.issueCommand("YELLOW")
+
+	##BlueprintPlugin
+        @octoprint.plugin.BlueprintPlugin.route("/cycleon", methods=["GET"])
+        def cycleon(self):
+                return self.issueCommand("CYCLEON")
+
+	##BlueprintPlugin
+        @octoprint.plugin.BlueprintPlugin.route("/cyclewhite", methods=["GET"])
+        def cyclewhite(self):
+                return self.issueCommand("CYCLEWHITE")
+
+        ##BlueprintPlugin
+        @octoprint.plugin.BlueprintPlugin.route("/standby", methods=["GET"])
+        def standby(self):
+                return self.issueCommand("STANDBY")
+
+
+
 	def is_blueprint_protected(self):
 		return False
 

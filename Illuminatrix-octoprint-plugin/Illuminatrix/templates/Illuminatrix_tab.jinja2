@@ -1,9 +1,32 @@
 <div style="padding:5px;">
+	<!--<script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"> </script>-->
+	<script>	
+		function callApi(request) {
+			console.log("Illuminatrix says: hey..."+request);
+			var apiPrefix = "/plugin/Illuminatrix/";
+			$.get(apiPrefix + request);
+		}
+	</script>
+	
+
 	<h3>Illuminatrix Manual Controls</h3>
-	<a href="/plugin/Illuminatrix/on">Lights On</a><BR/>
-	<a href="/plugin/Illuminatrix/off">Lights Off</a><BR />
-	<a href="/plugin/Illuminatrix/white">White mode</a><BR />
-	<a href="/plugin/Illuminatrix/red">Red</a><BR/>
-	<a href="/plugin/Illuminatrix/green">Green</a><BR />
-	<a href="/plugin/Illuminatrix/blue">Blue</a><BR />
+	<input type="submit" value="On" onclick="callApi('on');">
+	<input type="submit" value="Off" onclick="callApi('off');">
+	<input type="submit" value="Standby" onclick="callApi('standby');">
+
+	<div>
+		<h4>Colors</h4>
+		<input type="submit" value="White" onclick="callApi('white');">
+		<input type="submit" value="Red" onclick="callApi('red');">
+		<input type="submit" value="Green" onclick="callApi('green');">
+		<input type="submit" value="Blue" onclick="callApi('blue');">
+		<input type="submit" value="Purple" onclick="callApi('purple');">
+	        <input type="submit" value="Yellow" onclick="callApi('yellow');">
+	</div>
+	
+	<div>
+		<h4>Animated</h4>
+		<input type="submit" value="Cycle " onclick="callApi('cycleon');">
+		<input type="submit" value="Cycle White" onclick="callApi('cyclewhite');">
+	</div>
 </div>
