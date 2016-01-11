@@ -35,3 +35,5 @@ Here is a non-exhaustive list of the lighting commands the Illuminatrix Arduino 
  * SET [led #] [pwm value] [0|1] 
 
 The SET command lets you manually specific an LED pin # (0-2, typically), a pwm value (0-255) and an enable flag; 0 or 1. For example "SET 2 255 1" sets LED pin 2 to full brightness and enables it.
+
+Commands are delimited by ';' characters, or carrige returns. Thus, in the Illuminatrix Octoprint plugin, you could chain commands, if it suits you. For example, you could set an event to run "SET 0 128 1;SET 1 128 1;SET 2 255 1;". That would set LEDs #0 and #1 to half PWM and LED #2 to full.
