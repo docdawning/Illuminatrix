@@ -3,7 +3,7 @@ Illuminatrix is a stateful lighting system for 3D printers. For instance, your p
 
 ## Demo
 <i>Click the below GIF to see the detailed demo video on YouTube.</i>
-[![Illuminatrix Demo](http://www.dawning.ca/wp-content/uploads/2016/01/IlluminatrixDemoGif.gif)](https://www.youtube.com/embed/iWDjNnod_Ak)
+[![Illuminatrix Demo](http://www.dawning.ca/wp-content/uploads/2016/01/IlluminatrixDemoDemo.gif)](https://www.youtube.com/embed/iWDjNnod_Ak)
 
 ## Software
 Illuminatrix has two software components, an Octoprint Plugin and an Arduino firmware. 
