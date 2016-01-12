@@ -9,6 +9,7 @@ void setLEDs(boolean state);
 char* findSpaceDelimitedSubstring(String input, int numberOfLeadingSpaces);
 void setLED(String input);
 void setColor(Color color);
+void cycleOn();
 void interpretInput(String input);
 void resetColorMins();
 void setForWhiteCycle();
@@ -132,6 +133,11 @@ void setLEDs(boolean state){
 	for (int i=0;i<3;i++) {
 		LEDS[i].activated = state;
 	}
+	
+	if (!state) {
+		hypnoOrb = false;
+		resetColorMins();
+	}
 }
 
 char* findSpaceDelimitedSubstring(String input, int numberOfLeadingSpaces) {
@@ -194,6 +200,11 @@ void setColor(Color color) {
 	}
 }
 
+void cycleOn() {
+	hypnoOrb=true;
+	setLEDs(true);
+}
+
 void interpretInput(String input) {
 	if (inputString.startsWith("ON")) setLEDs(true);
 	if (inputString.startsWith("OFF")) setLEDs(false);
@@ -205,7 +216,7 @@ void interpretInput(String input) {
 	if (inputString.startsWith(NAME_YELLOW)) setColor(YELLOW);
 	if (inputString.startsWith(NAME_PURPLE)) setColor(PURPLE);
 	if (inputString.startsWith(NAME_STANDBY)) setColor(STANDBY);
-	if (inputString.startsWith("CYCLEON")) hypnoOrb=true;
+	if (inputString.startsWith("CYCLEON")) cycleOn();
 	if (inputString.startsWith("CYCLEOFF")) hypnoOrb=false;
 	if (inputString.startsWith("CYCLEWHITE")) setForWhiteCycle();
 	if (inputString.startsWith("RESETCOLORMINS")) resetColorMins();
@@ -219,10 +230,13 @@ void resetColorMins() {
 }
 
 void setForWhiteCycle() {
-	LEDS[0].minPWM = 64;
-	LEDS[1].minPWM = 96;
-	LEDS[2].minPWM = 16;
-	Serial.println("Rigged for white-baised cycling");
+//	LEDS[0].minPWM = 64;
+//	LEDS[1].minPWM = 96;
+//	LEDS[2].minPWM = 16;
+	LEDS[0].minPWM = 128;
+	LEDS[1].minPWM = 128;
+	LEDS[2].minPWM = 96;
+	hypnoOrb=true;
 }
 
 void serviceInputIfNecessary() {
