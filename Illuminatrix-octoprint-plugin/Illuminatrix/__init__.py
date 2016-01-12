@@ -17,9 +17,12 @@ class IlluminatrixPlugin(octoprint.plugin.StartupPlugin,
 		pass
 
 	def issueCommand(self, cmd_str):
-		Popen("echo -n \""+cmd_str+";\" > "+self._settings.get(["Port"]), shell=True)
-		#serial.Serial(self._settings.get(["Port"]),9600,timeout=4).write(cmd_str)
-		return flask.make_response("Illuminatrix "+cmd_str+" mode", 750)
+		try:
+			port = self._settings.get(["Port"])
+			Popen("echo -n \";"+cmd_str+";\" > "+port, shell=True)
+			return flask.make_response("Illuminatrix "+cmd_str+" mode", 750)
+		except:
+			return
 
 	##StartupPlugin
 	def on_after_startup(self):
@@ -98,7 +101,7 @@ class IlluminatrixPlugin(octoprint.plugin.StartupPlugin,
 	def on_event(self, event, payload):
 		command = self._settings.get([event])
 		if command is not None:
-			self.issueCommand(command);
+			self.issueCommand(command)
 
 	#### SETTINGS ###################################################
 	def get_settings_defaults(self):
