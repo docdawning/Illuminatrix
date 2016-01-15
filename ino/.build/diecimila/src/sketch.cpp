@@ -4,7 +4,6 @@
 void refreshLEDs();
 void setup();
 void printLEDs();
-void refreshLEDState(LED led);
 void setLEDs(boolean state);
 char* findSpaceDelimitedSubstring(String input, int numberOfLeadingSpaces);
 void setLED(String input);
@@ -41,6 +40,7 @@ using namespace std;
 #define	NAME_RED	"RED"
 #define NAME_GREEN	"GREEN"
 #define NAME_BLUE	"BLUE"
+#define	NAME_LIGHTBLUE	"LIGHTBLUE"
 #define NAME_YELLOW	"YELLOW"
 #define NAME_PURPLE	"PURPLE"
 #define NAME_STANDBY	"STANDBY"
@@ -55,8 +55,10 @@ Color WHITE;
 Color RED;
 Color GREEN;
 Color BLUE;
+Color LIGHTBLUE;
 Color YELLOW;
 Color PURPLE;
+Color OFF;
 Color STANDBY;
 String inputString;
 
@@ -74,7 +76,7 @@ int stepsSinceChange;
 //##################################################################
 void refreshLEDs() {
 	for(int i=0;i<3;i++) {
-		refreshLEDState(LEDS[i]);
+		LEDS[i].refreshLED();
 	}
 }
 
@@ -85,8 +87,10 @@ void setup() {
 	RED.initialize(255, 0, 0);
 	GREEN.initialize(0, 255, 0);
 	BLUE.initialize(0, 0, 255);
+	LIGHTBLUE.initialize(0, 166, 255);
 	YELLOW.initialize(255, 255, 0);
 	PURPLE.initialize(255, 0, 255);
+	OFF.initialize(0, 0 ,0);
 	STANDBY.initialize(16, 0, 0);
 
 
@@ -105,6 +109,7 @@ void setup() {
 	stepsSinceChange = 0;
 
 	Serial.println("Illuminatrix greets you.");
+	setColor(BLUE);
 } //end setup
 
 
@@ -121,11 +126,6 @@ void printLEDs() {
 		Serial.print(", state: ");
 		Serial.println(LEDS[i].activated);
 	}
-}
-
-void refreshLEDState(LED led) {
-	if (led.activated) analogWrite(led.pin, led.getValue());
-	else analogWrite(led.pin, led.minPWM);
 }
 
 void setLEDs(boolean state){
@@ -193,9 +193,9 @@ void setColor(Color color) {
 
 	for (int i=0;i<3;i++) {
 		LED* led = &LEDS[i];
-		if (led->name.startsWith(NAME_RED)) led->setValue(color.red);
-		if (led->name.startsWith(NAME_GREEN)) led->setValue(color.green);
-		if (led->name.startsWith(NAME_BLUE)) led->setValue(color.blue);
+		if (led->name.startsWith(NAME_RED)) led->setTarget(color.red);
+		if (led->name.startsWith(NAME_GREEN)) led->setTarget(color.green);
+		if (led->name.startsWith(NAME_BLUE)) led->setTarget(color.blue);
 		led->enable();
 	}
 }
@@ -203,16 +203,18 @@ void setColor(Color color) {
 void cycleOn() {
 	hypnoOrb=true;
 	setLEDs(true);
+	resetColorMins();
 }
 
 void interpretInput(String input) {
-	if (inputString.startsWith("ON")) setLEDs(true);
-	if (inputString.startsWith("OFF")) setLEDs(false);
+	if (inputString.startsWith("ON")) setColor(BLUE);
+	if (inputString.startsWith("OFF")) setColor(OFF);
 	if (inputString.startsWith("SET")) setLED(inputString);
 	if (inputString.startsWith(NAME_WHITE)) setColor(WHITE);
 	if (inputString.startsWith(NAME_RED)) setColor(RED);
 	if (inputString.startsWith(NAME_GREEN)) setColor(GREEN);
 	if (inputString.startsWith(NAME_BLUE)) setColor(BLUE);
+	if (inputString.startsWith(NAME_LIGHTBLUE)) setColor(LIGHTBLUE);
 	if (inputString.startsWith(NAME_YELLOW)) setColor(YELLOW);
 	if (inputString.startsWith(NAME_PURPLE)) setColor(PURPLE);
 	if (inputString.startsWith(NAME_STANDBY)) setColor(STANDBY);
@@ -230,9 +232,6 @@ void resetColorMins() {
 }
 
 void setForWhiteCycle() {
-//	LEDS[0].minPWM = 64;
-//	LEDS[1].minPWM = 96;
-//	LEDS[2].minPWM = 16;
 	LEDS[0].minPWM = 128;
 	LEDS[1].minPWM = 128;
 	LEDS[2].minPWM = 96;
