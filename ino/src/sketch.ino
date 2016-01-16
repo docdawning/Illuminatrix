@@ -13,10 +13,14 @@ using namespace std;
 #define l_G    5    //PWM pin for GREEN
 #define l_B    6    //PWM pin for BLUE
 
-#define BAUD_RATE	9600
+#define BAUD_RATE					9600
 #define NUMBER_OF_SPACES_BEFORE_PWM_IN_SET_CMD		2
 #define NUMBER_OF_SPACES_BEFORE_STATUS_IN_SET_CMD	3
 #define NUMBER_OF_SPACES_BEFORE_LED_NUMBER_IN_SET_CMD	1
+#define DEFAULT_MIN_BRIGHTNESS				500
+#define DEFAULT_MIN_BRIGHTNESS_FOR_SINGLE_COLOR_CYCLE	96
+#define DEFAULT_CYCLES_PER_STEP				100
+
 #define NAME_WHITE	"WHITE"
 #define	NAME_RED	"RED"
 #define NAME_GREEN	"GREEN"
@@ -25,6 +29,8 @@ using namespace std;
 #define NAME_YELLOW	"YELLOW"
 #define NAME_PURPLE	"PURPLE"
 #define NAME_STANDBY	"STANDBY"
+
+
 
 //Function Prototypes////
 void refreshLEDs();
@@ -51,6 +57,7 @@ int cyclesPerStep;
 int cyclesSinceLastStep;
 int minBrightness;
 int stepsSinceChange;
+int stepsPerHypnoOrbChange;
 
 //##################################################################
 //## Init functions ################################################
@@ -81,22 +88,34 @@ void setup() {
 	LEDS[2].initialize(NAME_BLUE, l_B, true, 0, 255, 180);
 
 	Serial.begin(BAUD_RATE);
-	hypnoOrb = false;
+	resetColorParameters();
 	hypnoOrbAscending = true;
 	hypnoOrbDeltaSubject = &LEDS[1];
-	cyclesPerStep = 100;
 	cyclesSinceLastStep = 0;
-	minBrightness = 500;
 	stepsSinceChange = 0;
+	stepsPerHypnoOrbChange = 96;
 
 	Serial.println("Illuminatrix greets you.");
-	setColor(BLUE);
+	setForSingleColorCycle(2);
 } //end setup
 
 
 //##################################################################
 //## Functions #####################################################
 //##################################################################
+
+void resetColorParameters() {
+	cyclesPerStep = DEFAULT_CYCLES_PER_STEP;
+	minBrightness = DEFAULT_MIN_BRIGHTNESS;
+	hypnoOrb = false;
+	for (int i=0;i<3;i++) {
+		LEDS[i].minPWM = 0;
+		LEDS[i].maxPWM = 255;
+		LEDS[i].enable();
+	}
+}
+
+
 
 void printLEDs() {
 	for(int i=0;i<3;i++) {
@@ -117,7 +136,7 @@ void setLEDs(boolean state){
 	
 	if (!state) {
 		hypnoOrb = false;
-		resetColorMins();
+		resetColorParameters();
 	}
 }
 
@@ -169,8 +188,7 @@ void setLED(String input) {
 }
 
 void setColor(Color color) {
-	hypnoOrb = false;
-	resetColorMins();	
+	resetColorParameters();	
 
 	for (int i=0;i<3;i++) {
 		LED* led = &LEDS[i];
@@ -184,7 +202,7 @@ void setColor(Color color) {
 void cycleOn() {
 	hypnoOrb=true;
 	setLEDs(true);
-	resetColorMins();
+	resetColorParameters();
 }
 
 void interpretInput(String input) {
@@ -202,21 +220,33 @@ void interpretInput(String input) {
 	if (inputString.startsWith("CYCLEON")) cycleOn();
 	if (inputString.startsWith("CYCLEOFF")) hypnoOrb=false;
 	if (inputString.startsWith("CYCLEWHITE")) setForWhiteCycle();
-	if (inputString.startsWith("RESETCOLORMINS")) resetColorMins();
+	if (inputString.startsWith("CYCLERED")) setForSingleColorCycle(0);
+	if (inputString.startsWith("CYCLEGREEN")) setForSingleColorCycle(1);
+	if (inputString.startsWith("CYCLEBLUE")) setForSingleColorCycle(2);
 	printLEDs();
 }
 
-void resetColorMins() {
-	LEDS[0].minPWM = 0;
-	LEDS[1].minPWM = 0;
-	LEDS[2].minPWM = 0;
-}
-
 void setForWhiteCycle() {
+	resetColorParameters();
 	LEDS[0].minPWM = 128;
 	LEDS[1].minPWM = 128;
 	LEDS[2].minPWM = 96;
-	hypnoOrb=true;
+	hypnoOrb = true;
+}
+
+void setForSingleColorCycle(int ledNumber) {
+	resetColorParameters();
+	//cyclesPerStep = 30;
+	minBrightness = DEFAULT_MIN_BRIGHTNESS_FOR_SINGLE_COLOR_CYCLE;
+	for (int i=0;i<3;i++) {
+		if (i == ledNumber) {
+			LEDS[i].minPWM = minBrightness;
+			LEDS[i].maxPWM = 255;
+		} else {
+			LEDS[i].disable();
+		}
+	}
+	hypnoOrb = true;
 }
 
 void serviceInputIfNecessary() {
@@ -247,20 +277,23 @@ bool isNotOkayToDescendFurther(bool preference) {
 	return preference;
 }
 
+//Grabs a suitable random LED, disregards inactive LEDs
+int getRandomLED() {
+	int led = random(0,3); //gets a random int 0 <= led < 3
+	int tryLimit = 10;
+	while (!LEDS[led].activated) {
+		if (tryLimit < 0) break;
+		tryLimit--;
+		led = random(0,3);
+	}
+	return led;
+}
+
 void serviceHypnoOrbIfNecessary() {
-	//Relevant Globals
-	//boolean hypnoOrb;
-	//boolean hypnoOrbAscending;
-	//LED hypnoOrbDeltaSubject;
-	//int	cyclesPerStep;
-	//int	cyclesSinceLastStep;
-	if (!hypnoOrb) return;
-	
-	//if subject has reached max, randomly select an LED and a direction
-	//if ((hypnoOrbDeltaSubject->getValue() > hypnoOrbDeltaSubject->maxPWM) || (hypnoOrbDeltaSubject->getValue() < hypnoOrbDeltaSubject->minPWM)) {
-	if (stepsSinceChange > 255) {
+	if (stepsSinceChange > stepsPerHypnoOrbChange) {
 		stepsSinceChange = 0;
-		int newLEDNumber = random(0,3);
+		//int newLEDNumber = random(0,3);
+		int newLEDNumber = getRandomLED();
 		int newDirection = random(0,2);
 		hypnoOrbDeltaSubject = &LEDS[newLEDNumber];
 		hypnoOrbAscending = isNotOkayToDescendFurther((boolean)(newDirection));
