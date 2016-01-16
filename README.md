@@ -33,6 +33,9 @@ Here is a non-exhaustive list of the lighting commands the Illuminatrix Arduino 
  * YELLOW
  * CYCLEON
  * CYCLEWHITE <i>(This is a white-baised colour cycle routine)</i>
+ * CYCLERED <i>Pulsates red</i>
+ * CYCLEGREEN
+ * CYCLEBLUE
  * SET [led #] [pwm value] [0|1] 
 
 The SET command lets you manually specific an LED pin # (0-2, typically), a pwm value (0-255) and an enable flag; 0 or 1. For example "SET 2 255 1" sets LED pin 2 to full brightness and enables it.

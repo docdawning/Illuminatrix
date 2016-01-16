@@ -70,6 +70,12 @@ class IlluminatrixPlugin(octoprint.plugin.StartupPlugin,
         def blue(self):
                 return self.issueCommand("BLUE")
 
+	##BlueprintPlugin
+        @octoprint.plugin.BlueprintPlugin.route("/lightblue", methods=["GET"])
+        def lightblue(self):
+                return self.issueCommand("LIGHTBLUE")
+
+
         ##BlueprintPlugin
         @octoprint.plugin.BlueprintPlugin.route("/purple", methods=["GET"])
         def purple(self):
@@ -79,6 +85,11 @@ class IlluminatrixPlugin(octoprint.plugin.StartupPlugin,
         @octoprint.plugin.BlueprintPlugin.route("/yellow", methods=["GET"])
         def yellow(self):
                 return self.issueCommand("YELLOW")
+
+        ##BlueprintPlugin
+        @octoprint.plugin.BlueprintPlugin.route("/standby", methods=["GET"])
+        def standby(self):
+                return self.issueCommand("STANDBY")
 
 	##BlueprintPlugin
         @octoprint.plugin.BlueprintPlugin.route("/cycleon", methods=["GET"])
@@ -90,12 +101,20 @@ class IlluminatrixPlugin(octoprint.plugin.StartupPlugin,
         def cyclewhite(self):
                 return self.issueCommand("CYCLEWHITE")
 
-        ##BlueprintPlugin
-        @octoprint.plugin.BlueprintPlugin.route("/standby", methods=["GET"])
-        def standby(self):
-                return self.issueCommand("STANDBY")
+	##BlueprintPlugin
+        @octoprint.plugin.BlueprintPlugin.route("/cyclered", methods=["GET"])
+        def cyclered(self):
+                return self.issueCommand("CYCLERED")
 
+	##BlueprintPlugin
+        @octoprint.plugin.BlueprintPlugin.route("/cyclegreen", methods=["GET"])
+        def cyclegreen(self):
+                return self.issueCommand("CYCLEGREEN")
 
+	##BlueprintPlugin
+        @octoprint.plugin.BlueprintPlugin.route("/cycleblue", methods=["GET"])
+        def cyclewblue(self):
+                return self.issueCommand("CYCLEBLUE")
 
 	def is_blueprint_protected(self):
 		return False
@@ -113,13 +132,13 @@ class IlluminatrixPlugin(octoprint.plugin.StartupPlugin,
 		return dict(
 			Disconnected="OFF",
 			Connected="STANDBY",
-			PrintStarted="CYCLEON",
+			PrintStarted="CYCLEWHITE",
 			PrintCancelled="STANDBY",
 			PrintFailed="RED",
 			PrintPaused="YELLOW",
 			PrintResumed="WHITE",
 			PrintDone="STANDBY",
-			Home="GREEN",
+			Home="CYCLEGREEN",
 			Port="/dev/ttyUSB0",
 		)
 
