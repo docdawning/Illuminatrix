@@ -311,6 +311,8 @@ int getRandomLED() {
 }
 
 void serviceHypnoOrbIfNecessary() {
+	if (!hypnoOrb) return;
+
 	if (stepsSinceChange > stepsPerHypnoOrbChange) {
 		stepsSinceChange = 0;
 		//int newLEDNumber = random(0,3);
