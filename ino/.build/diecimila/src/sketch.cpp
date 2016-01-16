@@ -221,9 +221,9 @@ void setColor(Color color) {
 }
 
 void cycleOn() {
+	resetColorParameters();
 	hypnoOrb=true;
 	setLEDs(true);
-	resetColorParameters();
 }
 
 void interpretInput(String input) {
