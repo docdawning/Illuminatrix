@@ -28,6 +28,7 @@ Here is a non-exhaustive list of the lighting commands the Illuminatrix Arduino 
  * RED
  * GREEN
  * BLUE
+ * LIGHTBLUE
  * PURPLE
  * YELLOW
  * CYCLEON
