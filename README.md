@@ -1,5 +1,5 @@
 # Illuminatrix
-Illuminatrix is a stateful lighting system for 3D printers. For instance, your printer will be lit dim-red when in "STANDBY", "GREEN" once an axis has been zeroed, pseudo-"WHITE" while printing, "YELLOW" when paused, "RED" if the print has failed, etc. Obviously these are default settings.
+Illuminatrix is an epic stateful lighting system for 3D printers. For instance, your printer will be lit dim-red when in "STANDBY", "GREEN" once an axis has been zeroed, pseudo-"WHITE" while printing, "YELLOW" when paused, "RED" if the print has failed, etc. Obviously these are default settings.
 
 ## Demo
 <i>Click the below GIF to see the detailed demo video on YouTube.</i>
