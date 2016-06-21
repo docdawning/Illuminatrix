@@ -11,7 +11,7 @@ Illuminatrix has two software components, an Octoprint Plugin and an Arduino fir
 ## Software Setup
 This list is a work in progress
 <UL>
-<LI>apt-get install arduino-core</LI>
+<LI>apt-get install arduino-core arduino-mk</LI>
 </UL>
 
 ## Hardware
