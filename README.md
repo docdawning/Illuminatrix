@@ -10,7 +10,9 @@ Illuminatrix has two software components, an Octoprint Plugin and an Arduino fir
 
 ## Software Setup
 This list is a work in progress
-1. apt-get install arduino-core
+<UL>
+<LI>apt-get install arduino-core</LI>
+</UL>
 
 ## Hardware
 Illuminatrix depends on a dedicated Arduino board to receive basic commands issued by the Octoprint plugin. Therefore you need an Arduino hooked-up to your Octoprint server. The PWM pins of the Arduino are used to drive your RGB LED(s). Small systems can have the RGB LED connected directly to the Arduino PWM pins, though it's best to use the PWM pins to instead drive some transistors to switch on/off power from a dedicated source.
