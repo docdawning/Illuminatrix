@@ -139,7 +139,7 @@ class IlluminatrixPlugin(octoprint.plugin.StartupPlugin,
 			PrintResumed="WHITE",
 			PrintDone="STANDBY",
 			Home="CYCLEGREEN",
-			Port="/dev/ttyUSB0",
+			Port="/dev/ttyAMA0",
 		)
 
 	def get_template_configs(self):
