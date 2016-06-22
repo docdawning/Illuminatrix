@@ -1,2 +1,5 @@
 #!/bin/bash
-ino upload -p /dev/ttyUSB0 -m diecimila
+#diecimila, pro5v
+PORT=/dev/ttyUSB0
+BOARD=pro5v
+ino upload -p $PORT -m $BOARD
