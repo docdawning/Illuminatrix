@@ -17,8 +17,11 @@ class IlluminatrixPlugin(octoprint.plugin.StartupPlugin,
 		pass
 
 	def setSerialConfig(self, port):
-		if port is not None:
-			Popen("stty -F "+port+" cs8 9600 min 100 time 2 -iuclc -ixany -imaxbel -iutf8 -parenb -parodd cs8 -hupcl -cstopb cread clocal -crtscts -ignbrk brkint ignpar -parmrk -inpck -istrip -inlcr -igncr -icrnl ixon -ixoff -iuclc -ixany -imaxbel -iutf8 -opost -olcuc -ocrnl -onlcr -onocr -onlret -ofill -ofdel nl0 cr0 tab0 bs0 vt0 ff0 -isig -icanon iexten -echo echoe echok -echonl -noflsh -xcase -tostop -echoprt echoctl echoke &", shell=True)
+		try:
+			if port is not None:
+				Popen("stty -F "+port+" cs8 9600 min 100 time 2 -iuclc -ixany -imaxbel -iutf8 -parenb -parodd cs8 -hupcl -cstopb cread clocal -crtscts -ignbrk brkint ignpar -parmrk -inpck -istrip -inlcr -igncr -icrnl ixon -ixoff -iuclc -ixany -imaxbel -iutf8 -opost -olcuc -ocrnl -onlcr -onocr -onlret -ofill -ofdel nl0 cr0 tab0 bs0 vt0 ff0 -isig -icanon iexten -echo echoe echok -echonl -noflsh -xcase -tostop -echoprt echoctl echoke &", shell=True)
+		except:
+			return
 
 	def issueCommand(self, cmd_str):
 		try:
