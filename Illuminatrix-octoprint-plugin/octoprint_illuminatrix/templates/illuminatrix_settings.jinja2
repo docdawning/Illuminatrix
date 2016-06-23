@@ -1,0 +1,52 @@
+<h3>Illuminatrix Settings</h3>
+<form class="form-horizontal">
+	<div class="control-group">
+		<label class="control-label">{{ _('URL') }}</label>
+		<div class="controls">
+			Port to Illuminatrix Arduino <input type="text" class="input-block-level" data-bind="value: settings.plugins.illuminatrix.Port">
+			<BR /><BR />
+			<h5>Events</h5>
+			Disconnected 
+			<input type="text" class="input-block-level" data-bind="value: settings.plugins.illuminatrix.Disconnected">
+			
+			<BR /><BR />
+			Connected
+			<input type="text" class="input-block-level" data-bind="value: settings.plugins.illuminatrix.Connected">
+
+			<BR /><BR />
+			PrintStarted
+                        <input type="text" class="input-block-level" data-bind="value: settings.plugins.illuminatrix.PrintStarted">
+
+			<BR /><BR />
+                        PrintCancelled
+			<input type="text" class="input-block-level" data-bind="value: settings.plugins.illuminatrix.PrintCancelled">
+
+			<BR /><BR />
+                        PrintFailed
+			<input type="text" class="input-block-level" data-bind="value: settings.plugins.illuminatrix.PrintFailed">
+
+			<BR /><BR />
+			PrintPaused
+                        <input type="text" class="input-block-level" data-bind="value: settings.plugins.illuminatrix.PrintPaused">
+
+                        <BR /><BR />
+                        PrintResumed
+                        <input type="text" class="input-block-level" data-bind="value: settings.plugins.illuminatrix.PrintResumed">
+
+                        <BR /><BR />
+                        PrintDone
+                        <input type="text" class="input-block-level" data-bind="value: settings.plugins.illuminatrix.PrintDone">
+
+                        <BR /><BR />
+                        Home <i>(An axis is homed)</i>
+                        <input type="text" class="input-block-level" data-bind="value: settings.plugins.illuminatrix.Home">
+
+			<BR /><BR />
+			Possible commands to Illuminatrix controller
+			<i>
+			OFF, ON, WHITE, RED, GREEN, BLUE, STANDBY
+			</i>
+		</div>
+	</div>
+</form>
+

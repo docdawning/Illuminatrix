@@ -3,7 +3,7 @@
 	<script>	
 		function callApi(request) {
 			console.log("Illuminatrix says: hey..."+request);
-			var apiPrefix = "/plugin/Illuminatrix/";
+			var apiPrefix = "/plugin/illuminatrix/";
 			$.get(apiPrefix + request);
 		}
 	</script>
@@ -49,11 +49,10 @@
 	
 	<div>
 		<h4>Animated</h4>
-		<input type="submit" value="Cycle " onclick="callApi('cycleon');">
+		<input type="submit" value="Cycle" onclick="callApi('cycleon');">
 		<input type="submit" value="Cycle White" onclick="callApi('cyclewhite');">
 		<input type="submit" value="Cycle Red" onclick="callApi('cyclered');">
 		<input type="submit" value="Cycle Green" onclick="callApi('cyclegreen');">
 		<input type="submit" value="Cycle Blue" onclick="callApi('cycleblue');">
 	</div>
 </div>
-<iframe data-bind:"attr: {src: currentURL}"></iframe>

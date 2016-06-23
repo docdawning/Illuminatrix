@@ -13,8 +13,8 @@ class IlluminatrixPlugin(octoprint.plugin.StartupPlugin,
 			octoprint.plugin.BlueprintPlugin,
 			octoprint.plugin.SettingsPlugin):
 
-	def __init__(self):
-		pass
+#	def __init__(self):
+#		pass
 
 	def setSerialConfig(self, port):
 		try:
@@ -39,7 +39,9 @@ class IlluminatrixPlugin(octoprint.plugin.StartupPlugin,
 	##TemplatePlugin
 	def get_template_configs(self):
 		return [
-			dict(type="tab", template="Illuminatrix_tab.jinja2")
+			dict(type="tab", custom_bindings=False),
+			dict(type="settings", custom_bindings=False), 
+			#dict(type="tab", template="Illuminatrix_tab.jinja2")
 			#dict(type="settings", template="Illuminatrix_settings.jinja2")
 		]
 
@@ -147,11 +149,13 @@ class IlluminatrixPlugin(octoprint.plugin.StartupPlugin,
 
 	def get_template_configs(self):
 		return [
-			dict(type="settings", custom_bindings=False)
+			dict(type="settings", custom_bindings=False),
+			dict(type="tab", custom_bindings=False),
 		]
 
 # If you want your plugin to be registered within OctoPrint under a different name than what you defined in setup.py
 # ("OctoPrint-PluginIlluminatrix"), you may define that here. Same goes for the other metadata derived from setup.py that
 # can be overwritten via __plugin_xyz__ control properties. See the documentation for that.
+
 __plugin_name__ = "Illuminatrix"
 __plugin_implementation__ = IlluminatrixPlugin()
