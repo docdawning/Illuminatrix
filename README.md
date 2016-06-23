@@ -22,7 +22,7 @@ Illuminatrix depends on a dedicated Arduino board to receive basic commands issu
 
 ## Hardware Setup
 1. Get an Arduino, power & connect it to your octoprint server via USB.
-2. Attach an RGB LED to the lowest numbered PWM output pins on the Ardino. Or drive 3 transistors as off/on switches via the PWM pins.
+2. Attach an RGB LED to the lowest numbered PWM output pins on the Arduino. Or drive 3 transistors as off/on switches via the PWM pins.
 3. Position the RGB LED(s) where you want.
 4. Flash the Arduino using the upload script in the ino directory. Pay attention to modify the serial port name and arduino type, if necessary. Be particularly careful if you happen to be using the same type of Arduino as your printer motherboard, you don't want to accidentally flash your printer motherboard instead of your Illuminatrix Arduino.
 
