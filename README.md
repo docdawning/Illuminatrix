@@ -9,7 +9,7 @@
 Illuminatrix has two software components:
 <UL>
 <LI>An Arduino firmware</LI>
-<LI>An Octoprint Plugin</LI> 
+<LI>An Octoprint plugin</LI> 
 </UL>
 
 ## Software Setup
@@ -22,7 +22,7 @@ This process is a work in progress
 </OL>
 
 ## Hardware
-Illuminatrix depends on a dedicated Arduino board to receive basic commands issued by the Octoprint plugin. Therefore you need an Arduino hooked-up to your Octoprint server. The PWM pins of the Arduino are used to drive your RGB LED(s). Small systems can have the RGB LED connected directly to the Arduino PWM pins, though it's best to use the PWM pins to instead drive some transistors to switch on/off power from a dedicated source.
+Illuminatrix depends on a dedicated Arduino board to receive basic commands issued by the Octoprint plugin. Therefore you need an Arduino hooked-up to your Octoprint server. The PWM pins (3, 5 and 6) of the Arduino are used to drive your RGB LED(s). Small systems can have a single RGB LED connected directly to the Arduino PWM pins, though it's best to use the PWM pins to instead drive some transistors to switch on/off power from a dedicated source.
 
 ## Hardware Setup
 1. Get an Arduino, power & connect it to your octoprint server via USB.
@@ -46,8 +46,8 @@ Here is a non-exhaustive list of the lighting commands the Illuminatrix Arduino 
  * CYCLERED <i>Pulsates red</i>
  * CYCLEGREEN
  * CYCLEBLUE
- * SET [led #] [pwm value] [0|1] 
+ * SET [led # (0-2)] [pwm value (0-255)] [on/off (0,1)] 
 
 The SET command lets you manually specific an LED pin # (0-2, typically), a pwm value (0-255) and an enable flag; 0 or 1. For example "SET 2 255 1" sets LED pin 2 to full brightness and enables it.
 
-Commands are delimited by ';' characters, or carrige returns. Thus, in the Illuminatrix Octoprint plugin, you could chain commands, if it suits you. For example, you could set an event to run "SET 0 128 1;SET 1 128 1;SET 2 255 1;". That would set LEDs #0 and #1 to half PWM and LED #2 to full.
+Commands are delimited by ';' characters, or carrige returns. Thus, in the Illuminatrix Octoprint plugin, you could chain commands, if it suits you. For example, you could set an event to run "SET 0 128 1;SET 1 128 1;SET 2 255 1;". That would set LEDs #0 and #1 to half PWM and LED #2 to full PWM brightness.
