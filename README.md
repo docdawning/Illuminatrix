@@ -6,7 +6,11 @@
 [![Illuminatrix Demo](http://www.dawning.ca/wp-content/uploads/2016/01/IlluminatrixDemoDemo.gif)](https://youtu.be/np1gUWAG9M8)
 
 ## Software
-Illuminatrix has two software components, an Octoprint Plugin and an Arduino firmware. 
+Illuminatrix has two software components:
+<UL>
+<LI>An Arduino firmware</LI>
+<LI>An Octoprint Plugin</LI> 
+</UL>
 
 ## Software Setup
 This process is a work in progress 
